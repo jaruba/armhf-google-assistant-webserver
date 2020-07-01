@@ -11,10 +11,15 @@ ADD .asoundrc /root/
 WORKDIR /tmp
 RUN pip3 install -r requirements.txt
 RUN pip3 install --upgrade six
-RUN pip3 install --upgrade google-assistant-library google-auth \
-        requests_oauthlib cherrypy flask flask-jsonpify flask-restful \
-        grpcio google-assistant-grpc google-auth-oauthlib \
-        setuptools wheel google-assistant-sdk[samples] pyopenssl
+RUN pip3 install --no-cache-dir \
+    cherrypy=="18.1.1" \
+    google-assistant-grpc=="0.2.0" \
+    google-assistant-library=="1.0.0" \
+    google-assistant-sdk=="0.5.0" \
+    google-auth=="1.6.3" \
+    requests_oauthlib=="1.2.0"
+RUN pip3 install --upgrade flask flask-jsonpify flask-restful \
+        grpcio setuptools wheel pyopenssl
 #RUN apt-get remove -y --purge python3-pip python3-dev
 RUN apt-get clean -y
 RUN rm -rf /var/lib/apt/lists/*
